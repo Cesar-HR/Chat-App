@@ -20,6 +20,9 @@ export const userReducer = createSlice({
     register: (state, action) => {
       state.user = action.payload;
     },
+    login: (state, action) => {
+      state.user = action.payload;
+    },
     set_loading: (state) => {
       state.loading = true;
     },
@@ -38,7 +41,14 @@ export const userReducer = createSlice({
   },
 });
 
-export const { register, set_loading, set_not_loading, error, success, reset } =
-  userReducer.actions;
+export const {
+  register,
+  login,
+  set_loading,
+  set_not_loading,
+  error,
+  success,
+  reset,
+} = userReducer.actions;
 
 export default userReducer.reducer;

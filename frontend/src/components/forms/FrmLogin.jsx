@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useValidation } from "./../../hooks/useValidation";
-import { LOGIN, APP, AVATAR } from "./../../config/routes/publicRoutes";
+import { useValidation } from "../../hooks/useValidation";
+import { APP, REGISTER } from "./../../config/routes/publicRoutes";
 import { getStorageItem } from "../../utils/localStorage";
 
 import Text from "./../inputs/Text";
@@ -10,15 +10,15 @@ import Password from "./../inputs/Password";
 import Loader from "./../extras/Loader";
 
 import { useDispatch, useSelector } from "react-redux";
-import { createUser } from "./../../app/user/userAction";
+import { signinUser } from "../../app/user/userAction";
 
-const FrmRegister = () => {
+const FrmLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const success = useSelector((state) => state.user.success.status);
   const error = useSelector((state) => state.user.error);
   const loader = useSelector((state) => state.user.loading);
-  const { values, handleChangeInput, isInputValidForRegister, handleError } =
+  const { values, handleChangeInput, isInputValidForLogin, handleError } =
     useValidation();
 
   useEffect(() => {
@@ -26,16 +26,16 @@ const FrmRegister = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const registerUser = (evt) => {
+  const loginUser = (evt) => {
     evt.preventDefault();
-    if (isInputValidForRegister()) {
-      dispatch(createUser(values));
+    if (isInputValidForLogin()) {
+      dispatch(signinUser(values));
     }
   };
 
   useEffect(() => {
     if (success) {
-      navigate(AVATAR);
+      navigate(APP);
     } else {
       if (error.status) {
         handleError(error.message);
@@ -57,30 +57,17 @@ const FrmRegister = () => {
           onChange={handleChangeInput}
           maxlength="16"
         />
-        <Text
-          type="email"
-          placeholder="Email"
-          name="email"
-          onChange={handleChangeInput}
-          maxlength="50"
-        />
         <Password
           placeholder="Password"
           name="password"
           onChange={handleChangeInput}
           maxlength="16"
         />
-        <Text
-          type="password"
-          placeholder="Confirm password"
-          name="confirmPassword"
-          onChange={handleChangeInput}
-        />
-        <button className="button" onClick={registerUser}>
-          {loader ? <Loader /> : "Register"}
+        <button className="button" onClick={loginUser}>
+          {loader ? <Loader /> : "Log in"}
         </button>
         <span>
-          Already have an account? <Link to={LOGIN}>Login</Link>
+          Don't have an account? <Link to={REGISTER}>Register</Link>
         </span>
       </div>
     </Container>
@@ -171,11 +158,6 @@ const Container = styled.div`
       border: none;
       cursor: pointer;
       background-color: transparent;
-      user-select: none;
-
-      &:focus {
-        outline: none;
-      }
     }
 
     .icon {
@@ -195,4 +177,4 @@ Container.defaultProps = {
   },
 };
 
-export default FrmRegister;
+export default FrmLogin;

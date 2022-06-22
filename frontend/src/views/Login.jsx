@@ -1,7 +1,15 @@
-import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import FrmLogin from "./../components/forms/FrmLogin";
 
 const Login = () => {
-  return <div></div>;
+  return (
+    <>
+      <FrmLogin />
+      <ToastContainer limit={1} />
+    </>
+  );
 };
 
 export default Login;

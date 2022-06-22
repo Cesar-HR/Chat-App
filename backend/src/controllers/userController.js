@@ -30,3 +30,36 @@ module.exports.register = async (req, res, next) => {
     next(error);
   }
 };
+
+module.exports.login = async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    const data = await user.findOne({ username });
+
+    if (!data) {
+      return res.json({
+        status: false,
+        message: "Incorrect username.",
+      });
+    }
+
+    const passwordCheck = await bcrypt.compare(password, data.password);
+
+    if (!passwordCheck) {
+      return res.json({
+        status: false,
+        message: "Incorrect password.",
+      });
+    }
+
+    delete data.password;
+
+    return res.json({
+      status: true,
+      message: "User connected successfully!",
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
