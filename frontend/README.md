@@ -8,6 +8,10 @@ You can clone the project https://github.com/Cesar-HR/Chat-App.git
 
 In the project directory, you can run:
 
+### `npm install`
+
+Install the frontend dependencies
+
 ### `npm start`
 
 Runs the app in the development mode.\

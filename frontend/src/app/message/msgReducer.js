@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: [],
-  contacts: [],
+  message: [],
   loading: false,
   error: {
     status: false,
@@ -14,21 +13,15 @@ const initialState = {
   },
 };
 
-export const userReducer = createSlice({
-  name: "@user",
+export const msgReducer = createSlice({
+  name: "@message",
   initialState,
   reducers: {
-    register: (state, action) => {
-      state.user = action.payload;
+    send_message: (state, action) => {
+      state.message = action.payload;
     },
-    login: (state, action) => {
-      state.user = action.payload;
-    },
-    set_avatar: (state, action) => {
-      state.user = action.payload;
-    },
-    get_contacts: (state, action) => {
-      state.contacts = action.payload;
+    received_message: (state, action) => {
+      state.message = action.payload;
     },
     set_loading: (state) => {
       state.loading = true;
@@ -49,15 +42,13 @@ export const userReducer = createSlice({
 });
 
 export const {
-  register,
-  login,
-  set_avatar,
-  get_contacts,
+  send_message,
+  received_message,
   set_loading,
   set_not_loading,
   error,
   success,
   reset,
-} = userReducer.actions;
+} = msgReducer.actions;
 
-export default userReducer.reducer;
+export default msgReducer.reducer;

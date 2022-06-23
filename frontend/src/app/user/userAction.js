@@ -1,14 +1,16 @@
 import axios from "axios";
-
-import {
-  avatarRouter,
-  loginRouter,
-  registerRouter,
-} from "../../config/routes/endpoints";
 import { getStorageItem, setStorageItem } from "../../utils/localStorage";
 
 import {
+  avatarRouter,
+  getUsersRouter,
+  loginRouter,
+  registerRouter,
+} from "../../config/routes/endpoints";
+
+import {
   error,
+  get_contacts,
   login,
   register,
   reset,
@@ -161,6 +163,57 @@ export const setAvatarPicture = (avatarPicture) => {
         }
 
         return dispatch(set_avatar(data.data));
+      } else {
+        dispatch(set_not_loading());
+
+        dispatch(
+          error({
+            status: true,
+            message: data.message,
+          })
+        );
+      }
+    } catch (err) {
+      dispatch(set_not_loading());
+
+      if (err.code === "ERR_NETWORK") {
+        dispatch(
+          error({
+            status: true,
+            message: "Network Error. Try again later.",
+          })
+        );
+      } else {
+        dispatch(
+          error({
+            status: true,
+            message: err.message,
+          })
+        );
+      }
+    }
+  };
+};
+
+export const getAllContacts = (_userId) => {
+  return async (dispatch) => {
+    dispatch(reset());
+    dispatch(set_loading());
+
+    try {
+      const { data } = await axios.get(`${getUsersRouter}/${_userId}`);
+
+      if (data.status) {
+        dispatch(set_not_loading());
+
+        dispatch(
+          success({
+            status: data.status,
+            message: data.message,
+          })
+        );
+
+        return dispatch(get_contacts(data.data));
       } else {
         dispatch(set_not_loading());
 
