@@ -23,6 +23,9 @@ export const userReducer = createSlice({
     login: (state, action) => {
       state.user = action.payload;
     },
+    set_avatar: (state, action) => {
+      state.user = action.payload;
+    },
     set_loading: (state) => {
       state.loading = true;
     },
@@ -44,6 +47,7 @@ export const userReducer = createSlice({
 export const {
   register,
   login,
+  set_avatar,
   set_loading,
   set_not_loading,
   error,
