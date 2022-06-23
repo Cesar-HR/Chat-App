@@ -7,12 +7,15 @@
 ## Technologies 🛠️
 
 ### Frontend
+
 <div>
   <img  alt="React" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
+  <img  alt="Redux" src="https://img.shields.io/badge/redux%20toolkit-764abc?style=for-the-badge&logo=redux&logoColor=%ffffff"/>
   <img  alt="JavaScript" src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/>
 </div>
 
 ### Backend
+
 <div>
   <img  alt="NodeJS" src="https://img.shields.io/badge/-Node.Js-3ec129?logo=node.js&logoColor=white&style=for-the-badge"/>
   <img  alt="Express.js" src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"/>
